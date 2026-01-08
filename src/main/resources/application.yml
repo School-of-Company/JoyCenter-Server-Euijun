@@ -34,3 +34,10 @@ jwt:
   secret: ${JWT_SECRET:joycenter-local-jwt-secret}
   access-token-expire-time: ${JWT_ACCESS_EXPIRE:3600000}
   refresh-token-expire-time: ${JWT_REFRESH_EXPIRE:1209600000}
+
+oauth:
+  kakao:
+    client-id: ${KAKAO_CLIENT_ID}
+    redirect-uri: ${KAKAO_REDIRECT_URI}
+    token-uri: https://kauth.kakao.com/oauth/token
+    user-info-uri: https://kapi.kakao.com/v2/user/me
