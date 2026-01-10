@@ -30,6 +30,7 @@ public class SecurityConfig {
 
                         // AUTH
                         .requestMatchers("/api/auth/reissue").permitAll()
+                        .requestMatchers("/api/auth/oauth/**").permitAll()
 
                         // HEALTH
                         .requestMatchers("/api/health").permitAll()
