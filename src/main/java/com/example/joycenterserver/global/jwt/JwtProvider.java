@@ -1,5 +1,6 @@
 package com.example.joycenterserver.global.jwt;
 
+import com.example.joycenterserver.domain.auth.dto.TokenResponse;
 import com.example.joycenterserver.global.error.ErrorCode;
 import com.example.joycenterserver.global.error.GlobalException;
 import io.jsonwebtoken.*;
@@ -69,5 +70,19 @@ public class JwtProvider {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    public TokenResponse issueToken(Long memberId) {
+        String accessToken = createAccessToken(memberId);
+        String refreshToken = createRefreshToken(memberId);
+
+        long now = System.currentTimeMillis();
+
+        return new TokenResponse(
+                accessToken,
+                refreshToken,
+                new Date(now + jwtProperties.getAccessTokenExpireTime()),
+                new Date(now + jwtProperties.getRefreshTokenExpireTime())
+        );
     }
 }
