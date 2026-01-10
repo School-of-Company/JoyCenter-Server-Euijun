@@ -20,9 +20,6 @@ public class TokenReissueServiceImpl implements TokenReissueService {
 
         Long memberId = jwtProvider.getMemberId(refreshToken);
 
-        String newAccessToken = jwtProvider.createAccessToken(memberId);
-        String newRefreshToken = jwtProvider.createRefreshToken(memberId);
-
-        return new TokenResponse(newAccessToken, newRefreshToken);
+        return jwtProvider.issueToken(memberId);
     }
 }
