@@ -1,8 +1,8 @@
 package com.example.joycenterserver.global.jwt;
 
 import com.example.joycenterserver.domain.auth.dto.TokenResponse;
-import com.example.joycenterserver.global.error.ErrorCode;
-import com.example.joycenterserver.global.error.GlobalException;
+import com.example.joycenterserver.domain.auth.exception.ExpiredTokenException;
+import com.example.joycenterserver.domain.auth.exception.InvalidTokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -53,9 +53,9 @@ public class JwtProvider {
         try {
             parseClaims(token);
         } catch (ExpiredJwtException e) {
-            throw new GlobalException(ErrorCode.EXPIRED_TOKEN);
+            throw new ExpiredTokenException();
         } catch (JwtException | IllegalArgumentException e) {
-            throw new GlobalException(ErrorCode.INVALID_TOKEN);
+            throw new InvalidTokenException();
         }
     }
 
