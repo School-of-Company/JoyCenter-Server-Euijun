@@ -77,7 +77,7 @@ code={}
                         MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=utf-8")
                 .body(BodyInserters.fromFormData("grant_type", "authorization_code")
                         .with("client_id", clientId)
-                        .with("client_secret", clientSecret) // ⭐ 핵심
+                        .with("client_secret", clientSecret)
                         .with("redirect_uri", redirectUri)
                         .with("code", code)
                 )
