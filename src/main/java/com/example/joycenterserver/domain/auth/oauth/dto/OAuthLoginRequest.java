@@ -1,9 +1,9 @@
 package com.example.joycenterserver.domain.auth.oauth.dto;
 
-import com.example.joycenterserver.domain.auth.oauth.type.OAuthType;
-
 public record OAuthLoginRequest(
-        OAuthType provider,
-        String code
-) {
-}
+        String provider,
+        String code,
+        String redirectUri,
+        String clientId,
+        String clientSecret
+) {}
