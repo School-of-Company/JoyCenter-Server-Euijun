@@ -15,8 +15,8 @@ public class MemberGetOrCreateServiceImpl implements MemberGetOrCreateService {
     private final MemberRepository memberRepository;
 
     @Override
-    public Member getOrCreate(String email) {
+    public Member getOrCreate(String email, String name) {
         return memberRepository.findByEmail(email)
-                .orElseGet(() -> memberRepository.save(new Member(email)));
+                .orElseGet(() -> memberRepository.save(new Member(email, name)));
     }
 }
