@@ -19,6 +19,13 @@ public enum ErrorCode {
     NOT_FOUND_MEMBER(404, "해당 회원을 찾을 수 없습니다."),
     EMAIL_ALREADY_EXISTS(409, "이미 등록된 이메일입니다."),
 
+    // POST
+    NOT_FOUND_POST(404, "해당 게시글을 찾을 수 없습니다."),
+    POST_FORBIDDEN(403, "해당 게시글에 대한 권한이 없습니다."),
+    INVALID_POST_REQUEST(400, "게시글 요청 데이터가 올바르지 않습니다."),
+    INVALID_POST_TITLE(400, "게시글 제목은 1자 이상 100자 이하여야 합니다."),
+    INVALID_POST_CONTENT(400, "게시글 내용은 1자 이상 10000자 이하여야 합니다."),
+
     // COMMON
     INTERNAL_SERVER_ERROR(500, "예기치 못한 서버 에러가 발생했습니다.");
 
