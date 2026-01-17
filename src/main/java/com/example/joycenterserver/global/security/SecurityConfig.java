@@ -40,6 +40,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/post").authenticated()
                         .requestMatchers("/api/post/**").authenticated()
 
+                        // ATTACHMENT
+                        .requestMatchers("/api/attachments").authenticated()
+
 
                         .anyRequest().authenticated()
                 )
