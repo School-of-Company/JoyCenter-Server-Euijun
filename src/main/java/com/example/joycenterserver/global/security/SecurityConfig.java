@@ -36,6 +36,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/health").permitAll()
                         .requestMatchers("/api/test/token").permitAll()
 
+                        // POST
+                        .requestMatchers("/api/post").authenticated()
+                        .requestMatchers("/api/post/**").authenticated()
+
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
