@@ -3,6 +3,7 @@ package com.example.joycenterserver.global.error;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -16,6 +17,24 @@ public class GlobalExceptionHandler {
                 .status(exception.getErrorCode().getStatus())
                 .message(exception.getErrorCode().getMessage())
                 .build();
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException e) {
+        String field = e.getBindingResult().getFieldErrors().get(0).getField();
+
+        ErrorCode errorCode = switch (field) {
+            case "title" -> ErrorCode.INVALID_POST_TITLE;
+            case "content" -> ErrorCode.INVALID_POST_CONTENT;
+            default -> ErrorCode.INTERNAL_SERVER_ERROR;
+        };
+
+        ErrorResponse response = ErrorResponse.builder()
+                .status(errorCode.getStatus())
+                .message(errorCode.getMessage())
+                .build();
+
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
