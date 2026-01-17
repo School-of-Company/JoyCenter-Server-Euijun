@@ -26,6 +26,13 @@ public enum ErrorCode {
     INVALID_POST_TITLE(400, "게시글 제목은 1자 이상 100자 이하여야 합니다."),
     INVALID_POST_CONTENT(400, "게시글 내용은 1자 이상 10000자 이하여야 합니다."),
 
+    // ATTACHMENT
+    INVALID_ATTACHMENT_FILE(400, "첨부파일이 올바르지 않습니다."),
+    INVALID_ATTACHMENT_FILE_TYPE(400, "허용되지 않은 파일 형식입니다."),
+    ATTACHMENT_UPLOAD_FAILED(500, "첨부파일 업로드에 실패했습니다."),
+    NOT_FOUND_ATTACHMENT(404, "해당 첨부파일을 찾을 수 없습니다."),
+    ATTACHMENT_FORBIDDEN(403, "해당 첨부파일에 대한 권한이 없습니다."),
+
     // COMMON
     INTERNAL_SERVER_ERROR(500, "예기치 못한 서버 에러가 발생했습니다.");
 
