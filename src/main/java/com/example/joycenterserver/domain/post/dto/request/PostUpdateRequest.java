@@ -2,19 +2,21 @@ package com.example.joycenterserver.domain.post.dto.request;
 
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 public record PostUpdateRequest(
 
         @Size(max = 100)
         String title,
 
-        @Size(max = 5000)
-        String content
+        List<PostBlockRequest> blocks
 ) {
+
         public boolean hasTitle() {
                 return title != null;
         }
 
-        public boolean hasContent() {
-                return content != null;
+        public boolean hasBlocks() {
+                return blocks != null;
         }
 }

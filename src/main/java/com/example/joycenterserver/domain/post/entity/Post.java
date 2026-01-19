@@ -10,7 +10,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "post")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post {
@@ -19,12 +18,8 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 100)
     private String title;
-
-    @Lob
-    @Column(nullable = false)
-    private String content;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
@@ -34,14 +29,12 @@ public class Post {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    public Post(String title, String content, Member member) {
+    public Post(String title, Member member) {
         this.title = title;
-        this.content = content;
         this.member = member;
     }
 
-    public void update(String title, String content) {
+    public void update(String title) {
         this.title = title;
-        this.content = content;
     }
 }

@@ -2,6 +2,7 @@ package com.example.joycenterserver.domain.post.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import java.util.List;
 
 public record PostCreateRequest(
 
@@ -9,8 +10,6 @@ public record PostCreateRequest(
         @Size(max = 100)
         String title,
 
-        @NotBlank
-        @Size(max = 5000)
-        String content
+        List<PostBlockRequest> blocks
 ) {
 }
