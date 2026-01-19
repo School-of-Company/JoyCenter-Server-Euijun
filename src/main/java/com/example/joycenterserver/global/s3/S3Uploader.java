@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.io.IOException;
@@ -42,6 +43,19 @@ public class S3Uploader {
         return "https://" + awsProperties.getBucket()
                 + ".s3." + awsProperties.getRegion()
                 + ".amazonaws.com/" + key;
+    }
+
+    public void deleteByUrl(String fileUrl) {
+        String key = fileUrl.substring(
+                fileUrl.indexOf(".amazonaws.com/") + ".amazonaws.com/".length()
+        );
+
+        s3Client.deleteObject(
+                DeleteObjectRequest.builder()
+                        .bucket(awsProperties.getBucket())
+                        .key(key)
+                        .build()
+        );
     }
 
     private void validate(MultipartFile file, String type) {
