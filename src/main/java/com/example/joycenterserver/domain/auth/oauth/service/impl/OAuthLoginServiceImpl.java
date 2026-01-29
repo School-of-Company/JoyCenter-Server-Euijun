@@ -7,9 +7,9 @@ import com.example.joycenterserver.domain.auth.oauth.exception.UnsupportedOAuthP
 import com.example.joycenterserver.domain.auth.oauth.provider.OAuthProvider;
 import com.example.joycenterserver.domain.auth.oauth.service.OAuthLoginService;
 import com.example.joycenterserver.domain.auth.oauth.type.OAuthType;
+import com.example.joycenterserver.domain.auth.service.AuthTokenService;
 import com.example.joycenterserver.domain.member.entity.Member;
 import com.example.joycenterserver.domain.member.service.MemberGetOrCreateService;
-import com.example.joycenterserver.global.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +20,8 @@ import java.util.List;
 public class OAuthLoginServiceImpl implements OAuthLoginService {
 
     private final List<OAuthProvider> providers;
-    private final JwtProvider jwtProvider;
     private final MemberGetOrCreateService memberGetOrCreateService;
+    private final AuthTokenService authTokenService;
 
     @Override
     public TokenResponse login(OAuthLoginRequest request) {
@@ -40,6 +40,6 @@ public class OAuthLoginServiceImpl implements OAuthLoginService {
                 userInfo.name()
         );
 
-        return jwtProvider.issueToken(member.getMemberId());
+        return authTokenService.issue(member.getMemberId());
     }
 }
